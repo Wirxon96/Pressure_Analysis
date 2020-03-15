@@ -1,9 +1,6 @@
 import numpy as np
 import pandas as pd
-import scipy as sp
-from scipy.stats import norm
 import matplotlib.pyplot as plt
-from scipy.optimize import curve_fit
 from scipy.signal import find_peaks
 
 
@@ -65,7 +62,7 @@ for i in range(len(aray)-1):
     lc3 = 0.25*(x[aray[i+1]] - x[aray[i]])/2
     rc3 = 0.85*(x[aray[i+1]] - x[aray[i]])/2
     xz1 = find_polyder_roots(polyfits[3*i], lc1, rc1, 1)
-    xz2 = find_polyder_roots(polyfits[3*i+1], rc1-m, lc3+l-m, 1) # wybitnie wrażliwe miejsce, cut-offy zależą od siebie funkcyjnie
+    xz2 = find_polyder_roots(polyfits[3*i+1], rc1-m, lc3+l-m, 1)
     xz3 = find_polyder_roots(polyfits[3*i+2], lc3, rc3, 1)
     yz1 = np.polyder(polyfits[3*i], 1)(xz1)
     yz2 = np.polyder(polyfits[3*i+1], 1)(xz2)
@@ -86,7 +83,7 @@ for i in range(len(aray)-1):
     plt.plot(xp2, np.polyder(polyfits[(3 * i) + 1], 2)(xp2 - x[lhp]), c='g')
     plt.plot(xp3, np.polyder(polyfits[(3 * i) + 2], 2)(xp3 - x[hp]), c='orange')
     pxz1 = find_polyder_roots(polyfits[3 * i], lc1, rc1, 2)
-    pxz2 = find_polyder_roots(polyfits[3 * i + 1], rc1 - m, lc3 + l - m, 2)  # wybitnie wrażliwe miejsce, cut-offy zależą od siebie funkcyjnie
+    pxz2 = find_polyder_roots(polyfits[3 * i + 1], rc1 - m, lc3 + l - m, 2)
     pxz3 = find_polyder_roots(polyfits[3 * i + 2], lc3, rc3, 2)
     pyz1 = np.polyder(polyfits[3 * i], 2)(pxz1)
     pyz2 = np.polyder(polyfits[3 * i + 1], 2)(pxz2)
